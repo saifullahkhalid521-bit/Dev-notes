@@ -1,1 +1,0 @@
-This is a JavaScript file that contains information about functions in JavaScript. Functions are a fundamental building block in JavaScript, allowing you to encapsulate code for reuse and organization.
