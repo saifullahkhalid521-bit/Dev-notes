@@ -76,3 +76,16 @@ person.greet();
 
 //here the function will give "Saif" cause the arrow function inherits this from the surrounding scope, which is the greet method of the person object.
 ```
+
+```javascript
+Implesit
+const addTwo = (num1 , num2) => (num1 + num2);
+const addTwo = (num1 , num2) => ({username: "Saifullah"});
+console.log(addTwo(2 ,3))
+
+//Explisit
+const addThree = (num1 , num2 , num3) => {
+  return num1 + num2 + num3;
+}
+console.log(addThree(2 , 3 , 4));
+```
