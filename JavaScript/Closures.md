@@ -53,4 +53,31 @@ account.deposit(500);
 account.withdraw(200);
 
 account.balance();
+
+
+//...args use
+const once1 = (fn) => {
+  let checkOnece = false;
+  let result;
+
+  return (...args) => {
+    if (!checkOnece){
+      checkOnece = true;
+      result = fn(...args);
+    }
+    else{
+      console.log(result);
+    }
+    return result;
+  };
+};
+
+function Hello () {
+  console.log("Hello!");
+  return "done!";
+}
+const greet = once1(Hello);
+greet();
+greet();
+greet();
 ```
