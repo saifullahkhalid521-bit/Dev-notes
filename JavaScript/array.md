@@ -124,3 +124,51 @@ for (const letter of name) {
  i
  f */
 ```
+
+
+## Array methods
+
+.push() - adds one or more items to the end of an array.
+.pop() - removes the last item from an array.
+
+#### push()
+Adds one or more items to the end of an array.
+
+```javascript
+let fruits = ["apple", "banana"];
+
+fruits.push("mango");
+
+console.log(fruits);
+
+/*
+Output:
+["apple", "banana", "mango"]
+*/
+
+you can add multiple items at once:
+
+fruits.push("orange", "grapes");
+```
+
+#### pop()
+Removes the last item from an array.
+
+```javascript
+let fruits = ["apple", "banana", "mango"];
+
+fruits.pop();
+
+console.log(fruits);
+
+/*
+Output:
+["apple", "banana"]
+*/
+
+You can also save the removed item:
+
+let removedFruit = fruits.pop();
+
+console.log(removedFruit); // mango
+```
