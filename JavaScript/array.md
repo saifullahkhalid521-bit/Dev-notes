@@ -100,8 +100,8 @@ for (const value of array) {
   // code
 }
 ```
-.value mein har turn par array ka next item aata hai.
-.array woh list hai jiske items ko loop karna hai.
+* value mein har turn par array ka next item aata hai.
+* array woh list hai jiske items ko loop karna hai.
 
 #### Working
 ```javascript
@@ -130,15 +130,15 @@ for (const letter of name) {
 ________________________________________________________________________________________________
 
 ### Array.from
-Array.from() is used to create a new array from another value.
-It is useful when the value looks like a list but is not a normal array, such as a string or a Set.
+* Array.from() is used to create a new array from another value.
+* It is useful when the value looks like a list but is not a normal array, such as a string or a Set.
 
 ```javascript
 Array.from(value)
 ```
-.Array is JavaScript’s built-in array object.
-.from() means “make an array from this value.”
-.value is what you want to convert.
+* Array is JavaScript’s built-in array object.
+* from() means “make an array from this value.”
+* value is what you want to convert.
 
 #### Example with string
 ```javascript
@@ -163,7 +163,7 @@ console.log(newArray);
 [10, 20, 30]
 */
 ```
-A Set automatically removes duplicate values. Array.from() converts that Set into an array.
+A Set automatically removes duplicate values. Array.from() converts that Set into an array.<br>
 
 It can also transform items while converting:
 
@@ -182,8 +182,8 @@ ___________________________________________________________________
 
 ## Array methods
 
-.push() - adds one or more items to the end of an array.
-.pop() - removes the last item from an array.
+* push() - adds one or more items to the end of an array.
+* pop() - removes the last item from an array.
 
 #### push()
 Adds one or more items to the end of an array.
