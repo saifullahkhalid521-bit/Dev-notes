@@ -88,3 +88,39 @@ for (const index in fruits) {
   console.log(fruits[index]); // apple, banana, mango
 }
 ```
+
+### for...of
+for...of loop ka use values ko one by one access karne ke liye hota hai—mostly arrays aur strings mein.
+
+```javascript
+for (const value of array) {
+  // code
+}
+```
+.value mein har turn par array ka next item aata hai.
+.array woh list hai jiske items ko loop karna hai.
+
+#### Working
+```javascript
+const fruits = ["apple", "banana", "mango"];
+
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+// Output:
+// apple
+// banana
+// mango
+
+// Example with string
+const name = "Saif";
+
+for (const letter of name) {
+  console.log(letter);
+}
+/*Output:
+ S
+/a
+ i
+ f */
+```
