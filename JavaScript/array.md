@@ -11,9 +11,9 @@ console.log(fruits[0]); // Apple
 ## Array topics
 * for loop in array
 * forEach
-* Array.from
-* for...of
 * for...in
+* for...of
+* Array.from
 
 
 ### for loop in array
@@ -40,3 +40,51 @@ fruits.forEach(function (fruit, index, array) {
 });
 ```
 
+### for...in
+for...in is a JS loop used oto go through the property names (keys) of an object. It can also be used to loop through the indexes of an array.
+
+```javascript 
+for (const key in object) {
+  // code to run
+}
+```
+key is a temporary variable that holds one property name at a time.
+object is the object you want to inspect.
+
+#### Working
+```javascript
+ const person = {
+  name: "Saif",
+  age: 20,
+  city: "Delhi"
+};
+
+for (const key in person) {
+  console.log(key);
+}
+// Output:
+// name
+// age
+// city
+
+It gives the keys, not the values. To get the value, use square brackets:
+
+for (const key in person) {
+  console.log(key, ":", person[key]);
+}
+
+// Output:
+// name : Saif
+// age : 20
+// city : Delhi
+```
+
+#### Working with array
+```javascript
+const fruits = ["apple", "banana", "mango"];
+
+for (const index in fruits) {
+  console.log(index);         // 0, 1, 2
+  console.log(fruits[index]); // apple, banana, mango
+}
+```
