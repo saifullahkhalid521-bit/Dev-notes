@@ -26,6 +26,7 @@ for (let i = 0; i < fruits.length; i++) {
   console.log(fruits[i]);
 }
 ```
+__________________________________________________________________________________________________________________________
 
 ### forEach
 forEach() is an array method that runs a function once for every item in the array. It gives you the current value, its index, and the original array.
@@ -39,6 +40,7 @@ fruits.forEach(function (fruit, index, array) {
   console.log(array);  // complete fruits array
 });
 ```
+_____________________________________________________________________________________________________________________________
 
 ### for...in
 for...in is a JS loop used oto go through the property names (keys) of an object. It can also be used to loop through the indexes of an array.
@@ -88,6 +90,7 @@ for (const index in fruits) {
   console.log(fruits[index]); // apple, banana, mango
 }
 ```
+______________________________________________________________________________________________________
 
 ### for...of
 for...of loop ka use values ko one by one access karne ke liye hota hai—mostly arrays aur strings mein.
@@ -124,7 +127,58 @@ for (const letter of name) {
  i
  f */
 ```
+________________________________________________________________________________________________
 
+### Array.from
+Array.from() is used to create a new array from another value.
+It is useful when the value looks like a list but is not a normal array, such as a string or a Set.
+
+```javascript
+Array.from(value)
+```
+.Array is JavaScript’s built-in array object.
+.from() means “make an array from this value.”
+.value is what you want to convert.
+
+#### Example with string
+```javascript
+let name = "Saif";
+
+let letters = Array.from(name);
+
+console.log(letters);
+/*Output:
+["S", "a", "i", "f"]
+```
+
+#### Example with Set
+```javascript 
+let numbers = new Set([10, 20, 20, 30]);
+
+let newArray = Array.from(numbers);
+
+console.log(newArray);
+
+/*Output:
+[10, 20, 30]
+*/
+```
+A Set automatically removes duplicate values. Array.from() converts that Set into an array.
+
+It can also transform items while converting:
+
+```javascript
+let numbers = [1, 2, 3];
+
+let doubled = Array.from(numbers, number => number * 2);
+
+console.log(doubled);
+
+/*Output:
+[2, 4, 6]*/
+``` 
+
+___________________________________________________________________
 
 ## Array methods
 
@@ -150,6 +204,7 @@ you can add multiple items at once:
 
 fruits.push("orange", "grapes");
 ```
+_____________________________________________________________________________
 
 #### pop()
 Removes the last item from an array.
@@ -172,3 +227,4 @@ let removedFruit = fruits.pop();
 
 console.log(removedFruit); // mango
 ```
+__________________________________________________________________________________________________________
