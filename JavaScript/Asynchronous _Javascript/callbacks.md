@@ -191,3 +191,72 @@ User mil gaya
 Orders mil gaye
 Payment mil gayi
 Final payment: { orderId: 101, status: 'Paid' }
+
+
+## callbacks hell error handling
+
+* Callback hell with error handling tab hota hai jab multiple async tasks ko sequence mein run karte waqt callbacks ek ke andar ek nest hote jaate hain, aur har level par error check karna padta hai.
+
+* Isse code right side mein failta hai, repeat hota hai, aur read/maintain karna difficult ho jata hai.
+
+### Example
+```javascript
+function getUser(callback) {
+  setTimeout(() => {
+    callback(null, { id: 1, name: "Saif" });
+  }, 1000);
+}
+
+function getOrders(userId, callback) {
+  setTimeout(() => {
+    if (userId !== 1) {
+      callback("Orders not found", null);
+      return;
+    }
+
+    callback(null, [{ id: 101, product: "Laptop" }]);
+  }, 1000);
+}
+
+function getPayment(orderId, callback) {
+  setTimeout(() => {
+    if (orderId !== 101) {
+      callback("Payment not found", null);
+      return;
+    }
+
+    callback(null, { orderId, status: "Paid" });
+  }, 1000);
+
+  //Ab inko sequence mein, error handling ke saath call karo:
+
+  getUser((userError, user) => {
+  if (userError) {
+    console.log("User error:", userError);
+    return;
+  }
+
+  getOrders(user.id, (ordersError, orders) => {
+    if (ordersError) {
+      console.log("Orders error:", ordersError);
+      return;
+    }
+
+    getPayment(orders[0].id, (paymentError, payment) => {
+      if (paymentError) {
+        console.log("Payment error:", paymentError);
+        return;
+      }
+
+      console.log("Final payment:", payment);
+    });
+  });
+});
+
+/* Output:
+Final payment: { orderId: 101, status: 'Paid' }
+*/
+}
+```
+
+* Har callback ke andar next async function aur uska error check likha hua hai. Isi nested/repeated structure ko callback hell with error handling bolte hain.
