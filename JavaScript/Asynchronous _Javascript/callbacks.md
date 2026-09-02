@@ -132,3 +132,62 @@ user = null;
 User fetch ho raha hai...
 Error: User not found*/
 ```
+## Callback Hell
+* Callback hell ek situation hai jaha multiple nested callbacks ka use hota hai, jisse code ko samajhna aur maintain karna mushkil ho jata hai. 
+
+*Jab ek async kaam complete hone ke baad doosra async kaam start karna ho, hum uska callback pehle callback ke andar likhte hain.
+
+* Callback hell ko avoid karne ke liye promises ya async/await ka use kiya jata hai.
+
+### Example of Callback Hell
+
+1. User fetch karo  
+2. Us user ke orders fetch karo  
+3. First order ki payment fetch karo
+
+```javascript
+function getUser(callback) {
+  setTimeout(() => {
+    console.log("User mil gaya");
+    callback({ id: 1, name: "Saif" });
+  }, 1000);
+}
+
+function getOrders(userId, callback) {
+  setTimeout(() => {
+    console.log("Orders mil gaye");
+    callback([
+      { id: 101, product: "Laptop" },
+      { id: 102, product: "Mouse" }
+    ]);
+  }, 1000);
+}
+
+function getPayment(orderId, callback) {
+  setTimeout(() => {
+    console.log("Payment mil gayi");
+    callback({ orderId, status: "Paid" });
+  }, 1000);
+}
+
+// In functions ko sequence mein chalane ka callback way:
+
+getUser((user) => {
+  getOrders(user.id, (orders) => {
+    getPayment(orders[0].id, (payment) => {
+      console.log("Final payment:", payment);
+    });
+  });
+});
+```
+##### Flow of execution:
+getUser
+  └─ getOrders
+       └─ getPayment
+            └─ final result
+
+Output:
+User mil gaya
+Orders mil gaye
+Payment mil gayi
+Final payment: { orderId: 101, status: 'Paid' }
