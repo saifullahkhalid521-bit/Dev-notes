@@ -39,17 +39,37 @@ promise
  * We can also write promises without using variable like this:
 
  ```javascript  
-new Promise((resolve, reject) => {
-  const isSuccess = true;
+new Promise((resolve, reject) => {});
+```
 
-  if (isSuccess) {
-    resolve("Data successfully received");
-  } else {
-    reject("Something went wrong");
-  }
-}).then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+* we can also use multiple `.then()` methods to handle the result of a promise:
+* the nested `then()` will take the return value of the previous `then()` as its input as shown in the example below:
+
+```javascript
+const promiseFour = new Promise ((resolve , reject)=>{
+  setTimeout(()=>{
+    let error = false;
+    if(!error){
+      resolve({username: "Robot" , password: 1234});
+    }
+    else{
+      reject("ERROR: something went wrong.");
+    }
+  },1000)
+})
+
+promiseFour
+.then((data)=>{
+  console.log(data);
+  // console.log(data.username);
+  return data.username;
+})
+.then((username)=>{
+  console.log(username);
+})
+.catch((message)=>{
+  console.log(message);
+}).finally(()=> console.log(`Promise is either resolved or rejected.`));
+```
+##### Finally()
+* ye hamesa chalega chahe promise resolve ho ya reject ho.
