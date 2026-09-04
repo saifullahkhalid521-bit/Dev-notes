@@ -1,0 +1,4 @@
+git add .
+git commit -m "Your commit message"
+git pull origin main
+git push origin main
