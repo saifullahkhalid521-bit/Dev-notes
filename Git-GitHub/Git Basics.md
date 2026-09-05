@@ -88,3 +88,8 @@ recammendation: Always pull before pushing to avoid conflicts.
 2. git add .
 3. git commit -m "message"
 4. git push origin main
+
+
+1. Use git push -u origin main the FIRST time you push a newly created branch to a remote repository. Setting the tracking link once saves you keystrokes going forward.  
+
+2. Use git push (or git push origin main) for subsequent pushes once the tracking link is already established.  
