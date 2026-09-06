@@ -72,7 +72,7 @@ fetch('https://api.github.com/users/octocat')
     .catch(err => console.log('Error:', err));
    ```
 
-### Post Request (Data Create Karna)
+### 2. POST Request (Data Create Karna)
 ```javascript
 // POST - Naya user create karna
 const newUser = {
@@ -130,4 +130,44 @@ fetch('https://jsonplaceholder.typicode.com/users/1', {
     }
 })
 .catch(err => console.log('Error:', err));
+```
+
+### Headers Role
+
+* Headers are used to provide additional information about the request or response. For example, the `Content-Type` header is used to specify the type of data being sent in the request body.
+
+```javascript
+// Headers - Authentication, Content-Type, etc.
+
+fetch('https://api.github.com/user', {
+    headers: {
+        'Authorization': 'Bearer YOUR_TOKEN_HERE',  // Authentication
+        'Content-Type': 'application/json',        // Data type
+        'Accept': 'application/json'               // Response type
+    }
+})
+.then(res => res.json())
+.then(data => console.log(data))
+.catch(err => console.log('Error:', err));
+```
+
+### Error Handling - 🔴 CORE
+
+```javascript
+// fetch() sirf network errors par reject karta hai
+// 404, 500 par reject nahi karta - isliye humein manually handle karna padta hai
+
+fetch('https://api.github.com/users/unknownuser12345')
+    .then(response => {
+        if (!response.ok) {  // Agar status 200-299 nahi hai
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch(error => {
+        console.log('Network or HTTP Error:', error.message);
+    });
 ```
