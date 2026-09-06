@@ -227,4 +227,64 @@ fetch('https://api.github.com/users/invalid')
     })
     .then(data => console.log(data))
     .catch(err => console.log('Error:', err.message));
-    ```
+  ```
+
+
+## Common Use Cases in Real Projects
+```javascript
+
+// 1. Form Submit Karna
+javascript
+async function submitForm(formData) {
+    try {
+        const response = await fetch('https://api.example.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        if (!response.ok) throw new Error('Submission Failed');
+        
+        const result = await response.json();
+        console.log('Form Submitted:', result);
+    } catch (error) {
+        console.log('Error:', error);
+    }
+}
+
+
+// 2. Multiple APIs Se Data Lana
+javascript
+async function getDashboardData() {
+    try {
+        const [user, posts, comments] = await Promise.all([
+            fetch('https://jsonplaceholder.typicode.com/users/1').then(r => r.json()),
+            fetch('https://jsonplaceholder.typicode.com/posts').then(r => r.json()),
+            fetch('https://jsonplaceholder.typicode.com/comments').then(r => r.json())
+        ]);
+        
+        console.log('Dashboard Data:', { user, posts, comments });
+        return { user, posts, comments };
+    } catch (error) {
+        console.log('Error fetching dashboard data:', error);
+    }
+}
+
+
+// 3. Loading States ke Saath
+javascript
+async function fetchUserWithLoading() {
+    console.log('Loading...');  // Loading state
+    
+    try {
+        const response = await fetch('https://api.github.com/users/octocat');
+        const data = await response.json();
+        console.log('Data Loaded:', data);
+        return data;
+    } catch (error) {
+        console.log('Error:', error);
+    } finally {
+        console.log('Loading Complete');  // Always runs
+    }
+}
+```
