@@ -115,3 +115,19 @@ fetch('https://jsonplaceholder.typicode.com/users/1', {
 .then(data => console.log('Updated:', data))
 .catch(err => console.log('Error:', err));
 ```
+
+### 4. DELETE Request (Data Delete Karna)
+```javascript
+// DELETE - User delete karna
+fetch('https://jsonplaceholder.typicode.com/users/1', {
+    method: 'DELETE'
+})
+.then(res => {
+    if (res.status === 200) {
+        console.log('User Deleted Successfully');
+    } else {
+        console.log('Delete Failed');
+    }
+})
+.catch(err => console.log('Error:', err));
+```
