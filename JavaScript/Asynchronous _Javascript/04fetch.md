@@ -49,5 +49,25 @@ fetch('https://api.github.com/users/octocat')
     .then(data => {
         console.log(data);
     });
+
+    //response.formData()	Jab form data submit karna ho	File uploads
 ```
 
+## Different Types of Requests
+1. GET: Data fetch karne ke liye
+2. POST: Naya data create karne ke liye
+3. PUT: Existing data update karne ke liye
+4. DELETE: Data delete karne ke liye
+
+### 1. GET Request (Data Lana)
+```javascript
+// Simple GET - Data lana
+fetch('https://api.github.com/users/octocat')
+    .then(res => res.json())
+    .then(data => {
+        console.log('Name:', data.name);
+        console.log('Bio:', data.bio);
+        console.log('Followers:', data.followers);
+    })
+    .catch(err => console.log('Error:', err));
+   ```
