@@ -171,3 +171,60 @@ fetch('https://api.github.com/users/unknownuser12345')
         console.log('Network or HTTP Error:', error.message);
     });
 ```
+
+### Async/Await Version (Tumhare liye important)
+```javascript
+// Yeh tumhe abhi seekhna hai - yeh cleaner hai
+
+async function getGitHubUser() {
+    try {
+        const response = await fetch('https://api.github.com/users/octocat');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log('Name:', data.name);
+        console.log('Bio:', data.bio);
+        return data;
+    } catch (error) {
+        console.log('Error:', error.message);
+    }
+}
+
+// Call karo
+getGitHubUser();
+```
+
+
+### Common Pitfalls (Galtiyan) - Avoid Karein
+
+```javascript
+// ❌ GALT: Response ko directly use karna
+fetch('https://api.github.com/users/octocat')
+    .then(response => {
+        console.log(response);  // Yeh raw response hai, data nahi
+    });
+
+// ✅ SAHI: Response ko convert karo
+fetch('https://api.github.com/users/octocat')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+// ❌ GALT: 404/500 errors ko catch na karna
+fetch('https://api.github.com/users/invalid')
+    .then(response => response.json())  // 404 par bhi yeh chalega
+    .then(data => console.log(data));
+
+// ✅ SAHI: response.ok check karo
+fetch('https://api.github.com/users/invalid')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('User not found');
+        }
+        return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log('Error:', err.message));
+    ```
