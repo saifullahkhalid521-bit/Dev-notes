@@ -94,3 +94,24 @@ fetch('https://jsonplaceholder.typicode.com/users', {
 })
 .catch(err => console.log('Error:', err));
 ```
+
+
+### 3. PUT Request (Update Karna)
+```javascript
+// PUT - Existing user update karna
+const updatedUser = {
+    name: 'Rahul Sharma',
+    email: 'rahul.sharma@example.com'
+};
+
+fetch('https://jsonplaceholder.typicode.com/users/1', {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedUser)
+})
+.then(res => res.json())
+.then(data => console.log('Updated:', data))
+.catch(err => console.log('Error:', err));
+```
