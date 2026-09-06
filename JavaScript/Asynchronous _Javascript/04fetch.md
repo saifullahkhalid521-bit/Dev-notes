@@ -71,3 +71,26 @@ fetch('https://api.github.com/users/octocat')
     })
     .catch(err => console.log('Error:', err));
    ```
+
+### Post Request (Data Create Karna)
+```javascript
+// POST - Naya user create karna
+const newUser = {
+    name: 'Rahul Kumar',
+    email: 'rahul@example.com',
+    age: 25
+};
+
+fetch('https://jsonplaceholder.typicode.com/users', {
+    method: 'POST',                    // Request type
+    headers: {
+        'Content-Type': 'application/json',  // Data type batana
+    },
+    body: JSON.stringify(newUser)      // Data ko JSON string mein convert
+})
+.then(res => res.json())
+.then(data => {
+    console.log('User Created:', data);
+})
+.catch(err => console.log('Error:', err));
+```
