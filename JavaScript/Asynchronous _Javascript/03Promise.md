@@ -187,3 +187,109 @@ const response = await promiseFive;
 3. try = success code
 4. catch = rejected/error code
 5. finally = har case mein run hota hai
+
+## Promise chaining
+
+* Promise Chaining in JavaScript means running multiple asynchronous tasks one after another, where the result of one Promise is passed to the next .then().
+
+#### Example of Promise chaining:
+```javascript
+function placeOrder() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve("Order placed!");
+    }, 1000);
+  });
+}
+
+function makePayment(message) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message + " Payment successful!");
+    }, 1000);
+  });
+}
+
+function prepareFood(message) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message + " Food prepared!");
+    }, 1000);
+  });
+}
+
+function deliverFood(message) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(message + " Food delivered!");
+    }, 1000);
+  });
+}
+
+
+// Promise Chaining
+placeOrder()
+
+  // Order complete → Payment start
+  .then((result) => {
+    console.log(result);
+    return makePayment(result);
+  })
+
+  // Payment complete → Food preparation start
+  .then((result) => {
+    console.log(result);
+    return prepareFood(result);
+  })
+
+  // Food ready → Delivery start
+  .then((result) => {
+    console.log(result);
+    return deliverFood(result);
+  })
+
+  // Delivery complete
+  .then((result) => {
+    console.log(result);
+  })
+
+  // Agar koi error aaye
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+```
+* Using fetch API with Promise chaining:
+```javascript
+// Pehle users ka data fetch hoga
+fetch("https://jsonplaceholder.typicode.com/users/1")
+
+  // Response ko JSON mein convert karo
+  .then((response) => {
+    return response.json();
+  })
+
+  // JSON data milne ke baad user ka name nikalo
+  .then((user) => {
+    console.log("User:", user.name);
+
+    // Ab next API call kar sakte hain
+    return fetch(
+      `https://jsonplaceholder.typicode.com/posts?userId=${user.id}`
+    );
+  })
+
+  // Posts ka response JSON mein convert karo
+  .then((response) => {
+    return response.json();
+  })
+
+  // Finally posts mil jayenge
+  .then((posts) => {
+    console.log("Posts:", posts);
+  })
+
+  // Kisi bhi step mein error aaye
+  .catch((error) => {
+    console.log("Error:", error);
+  });
+  ```

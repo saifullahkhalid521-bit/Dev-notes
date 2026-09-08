@@ -84,7 +84,7 @@ const newUser = {
 fetch('https://jsonplaceholder.typicode.com/users', {
     method: 'POST',                    // Request type
     headers: {
-        'Content-Type': 'application/json',  // Data type batana
+        'Content-Type': 'application/json',  // Data type batana  "Jo data main bhej raha hoon, woh JSON format mein hai."
     },
     body: JSON.stringify(newUser)      // Data ko JSON string mein convert
 })
@@ -117,6 +117,7 @@ fetch('https://jsonplaceholder.typicode.com/users/1', {
 ```
 
 ### 4. DELETE Request (Data Delete Karna)
+* DELETE mein kya delete karna hai ye usually URL ke id se decide hota hai.
 ```javascript
 // DELETE - User delete karna
 fetch('https://jsonplaceholder.typicode.com/users/1', {
