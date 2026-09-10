@@ -258,7 +258,7 @@ placeOrder()
     console.log("Error:", error);
   });
 ```
-* Using fetch API with Promise chaining:
+#### Using fetch API with Promise chaining:
 ```javascript
 // Pehle users ka data fetch hoga
 fetch("https://jsonplaceholder.typicode.com/users/1")
@@ -293,3 +293,31 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
     console.log("Error:", error);
   });
   ```
+  ## Promise.all()
+* Promise.all() is a method that takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved, or rejects if any of the promises reject.
+
+#### Example of Promise.all():
+```javascript
+async function getData() {
+    try {
+        const [users, posts] = await Promise.all([
+            
+            // Users API
+            fetch("https://jsonplaceholder.typicode.com/users")
+                .then(res => res.json()),
+
+            // Posts API
+            fetch("https://jsonplaceholder.typicode.com/posts")
+                .then(res => res.json())
+        ]);
+
+        console.log("Users:", users);
+        console.log("Posts:", posts);
+
+    } catch (error) {
+        console.log("Error:", error.message);
+    }
+}
+getData();
+```
+* Promise.all() = multiple independent Promises ko ek saath run karo aur sabke complete hone ka wait karo.
