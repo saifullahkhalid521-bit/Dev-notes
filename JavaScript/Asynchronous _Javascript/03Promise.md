@@ -294,14 +294,15 @@ fetch("https://jsonplaceholder.typicode.com/users/1")
   });
   ```
   ## Promise.all()
-* Promise.all() is a method that takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved, or rejects if any of the promises reject.
+* Promise.all() is a method that takes an array of promises and returns a single promise that resolves when all of the promises in the array have resolved, or rejects if any of the promises reject. 
+* It returns an array of results in the same order as the promises were passed in, regardless of the order in which they resolve.
 
 #### Example of Promise.all():
 ```javascript
 async function getData() {
     try {
         const [users, posts] = await Promise.all([
-            
+            //here we are useig destructuring assignment to assign the resolved values of the promises to the variables users and posts.
             // Users API
             fetch("https://jsonplaceholder.typicode.com/users")
                 .then(res => res.json()),
@@ -319,5 +320,87 @@ async function getData() {
     }
 }
 getData();
+//this aproch will be useed in react js to fetch multiple data at a time and then use it in the component.
 ```
-* Promise.all() = multiple independent Promises ko ek saath run karo aur sabke complete hone ka wait karo.
+
+#### more easy example of Promise.all():
+```javascript
+// 3 promises banao
+
+const chai = new Promise((resolve) => {
+    setTimeout(() => resolve('☕ Chai ready'), 5000);
+});
+
+const paratha = new Promise((resolve) => {
+    setTimeout(() => resolve('🫓 Paratha ready'), 10000);
+});
+
+const anda = new Promise((resolve) => {
+    setTimeout(() => resolve('🥚 Anda ready'), 7000);
+});
+
+// Ab teeno ek saath start karo
+console.log('Kaam shuru...');
+
+Promise.all([chai, paratha, anda])
+    .then((results) => {
+        console.log('Sab ready:', results);
+        // Output after 10 seconds:
+        // Sab ready: ['☕ Chai ready', '🫓 Paratha ready', '🥚 Anda ready']
+    })
+    .catch((error) => {
+        console.log('Kuch galat:', error);
+    });
+```
+* Dhyan do: Total time 10 second laga, na ki 5+10+7 = 22 second. Kyunki teeno ek saath start hue.
+
+#### simple example with fetch
+```javascript
+// 3 different users ka data ek saath lao
+
+const user1 = fetch('https://api.github.com/users/octocat')
+    .then(response => response.json());
+
+const user2 = fetch('https://api.github.com/users/gaearon')
+    .then(response => response.json());
+
+const user3 = fetch('https://api.github.com/users/sindresorhus')
+    .then(response => response.json());
+
+Promise.all([user1, user2, user3])
+    .then((users) => {
+        // users ek array hai
+        console.log(users[0].name);  // The Octocat
+        console.log(users[1].name);  // Dan Abramov
+        console.log(users[2].name);  // Sindre Sorhus
+    })
+    .catch((error) => {
+        console.log('Koi ek user fail hua:', error);
+    });
+```
+
+### Error handling in Promise.all()
+```javascript
+const p1 = new Promise((resolve) => {
+    setTimeout(() => resolve('Success 1'), 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => reject('❌ P2 fail ho gaya'), 2000);
+});
+
+const p3 = new Promise((resolve) => {
+    setTimeout(() => resolve('Success 3'), 3000);
+});
+
+Promise.all([p1, p2, p3])
+    .then((results) => {
+        // ❌ Yeh kabhi nahi chalega
+        console.log('Sab success:', results);
+    })
+    .catch((error) => {
+        // ✅ Yeh chalega
+        console.log('Error:', error);  // "❌ P2 fail ho gaya"
+    });
+```
+* Matlab: p1 aur p3 success the, lekin p2 fail hone ki wajah se poora result discard ho gaya.
