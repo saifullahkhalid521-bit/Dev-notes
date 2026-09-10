@@ -404,3 +404,46 @@ Promise.all([p1, p2, p3])
     });
 ```
 * Matlab: p1 aur p3 success the, lekin p2 fail hone ki wajah se poora result discard ho gaya.
+
+## Promise.race
+* Promise.race() multiple Promises ko start karta hai, lekin jo Promise sabse pehle resolve hota hai, uska result le leta hai
+
+```javascript
+const p1 = new Promise(resolve => {
+    setTimeout(() => resolve("Promise 1"), 2000);
+});
+
+const p2 = new Promise(resolve => {
+    setTimeout(() => resolve("Promise 2"), 1000);
+});
+
+const result = await Promise.race([p1, p2]);
+
+console.log(result);
+// Output: "Promise 2" (kyunki p2 pehle resolve hua)
+```
+
+#### Real-world example of Promise.race():
+* Maan le tu kisi API ko call kar raha hai, but tu chahta hai:
+* "Agar API 3 seconds ke andar response nahi deti, toh timeout/error de do."
+```javascript
+const api = fetch("https://jsonplaceholder.typicode.com/users");
+
+const timeout = new Promise((_, reject) => {
+    setTimeout(() => {
+        reject(new Error("Request timed out"));
+    }, 3000);
+});
+
+try {
+    const response = await Promise.race([api, timeout]);
+
+    console.log("Response received:", response);
+
+} catch (error) {
+    console.log("Error:", error.message);
+}
+/* Agar API 3 seconds ke andar response nahi deti, toh "Request timed out" error milega.
+Agar API 3 seconds ke andar response deti hai, toh woh response milega.
+*/
+```
