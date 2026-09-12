@@ -27,6 +27,21 @@ function square (elem) {
 console.log(Double);
 ```
 
+* in map method we have three arguments in the callback , element ,Index and array. we can use these properties to get the index element and complete array.
+
+### Exapmle 
+```javaScript
+
+const names = ["Saif", "Robot", "Ego"];
+
+const result = names.map((elem, index, array) => {
+    return `${index}: ${elem}: ${array}`;
+});
+
+console.log(result);
+
+```
+
 * Using split and map()
 ```javaScript
 const dates = ["2024-1-10" , "2025-2-20" , "2026-3-30"];
