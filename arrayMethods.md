@@ -81,3 +81,29 @@ console.log(result);
 Why?
 Because { } wale arrow function mein explicit return chahiye.*/
 ```
+
+# filter() method
+* Array ke andar se condition satisfy karne wale elements ko select karke ek NEW array return karna.
+
+```javaScript
+const numbers = [10, 15, 20, 25, 30];
+
+const evenNumbers = numbers.filter((elem) => {
+    return elem % 2 === 0;
+});
+
+console.log(evenNumbers);
+/*Output
+[10, 20, 30]*/
+```
+* filter() ka callback true/false decide karta hai:
+1. 10 → true  → keep
+2. 15 → false → remove
+3. 20 → true  → keep
+4. 25 → false → remove
+5. 30 → true  → keep
+
+
+* Difference btween map and filter
+1. map()     → har element ko transform karta hai
+2. filter()  → elements ko condition ke basis par select karta hai
