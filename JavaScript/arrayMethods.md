@@ -149,3 +149,48 @@ const result = numsF
   .filter(n => isMultipleOf(n, 3));
 console.log(result);
 ```
+
+* in filter's argument we also have element , index and array same as map () method and we can use then to get expected results.
+```JavaScript
+const numbers = [10, 20, 10, 30, 20];
+
+// Remove duplicate numbers
+const uniqueNumbers = numbers.filter((element, index, array) => {
+  return array.indexOf(element) === index;
+  //Logic: array.indexOf(10) returns 0 (the first place 10 appears). At position 2, 0 === 2 is false, so the duplicate 10 is filtered out.
+});
+console.log(uniqueNumbers); // Output: [10, 20, 30]
+```
+
+
+# find() method
+* find() returns the FIRST element that matches a condition. If nothing matches, it returns undefined.
+
+* filter() gives you all matches (in an array). find() gives you the first match (a single value).
+
+* Here also we have element , index and array but index and array are used very rarely
+
+```JavaScript
+const nums = [1, 3, 5, 6, 7, 8];
+const firstEven = nums.find(n => n % 2 === 0);
+console.log(firstEven); 
+
+/* Output = 6
+Only 6 is returned (not 8), because find stops at the first match.*/
+
+const nums = [1, 3, 5];
+const result = nums.find(n => n % 2 === 0);
+console.log(result); // undefined
+```
+#### Rule of Thumb.
+* Need one specific item (by id, name, etc.)? → find()
+*Need a list of all matches? → filter()
+
+
+
+
+
+
+
+```JavaScript
+```
