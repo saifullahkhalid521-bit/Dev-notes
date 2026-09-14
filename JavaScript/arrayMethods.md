@@ -181,6 +181,12 @@ Only 6 is returned (not 8), because find stops at the first match.*/
 const nums = [1, 3, 5];
 const result = nums.find(n => n % 2 === 0);
 console.log(result); // undefined
+
+
+const dupli = [1 , 2 , 3 , 4 , 2 , 5];
+const findDupli = dupli.find((elem , i) => dupli.indexOf(elem) !== i);
+console.log(findDupli);
+/*Output -> 2*/
 ```
 #### Rule of Thumb.
 * Need one specific item (by id, name, etc.)? → find()

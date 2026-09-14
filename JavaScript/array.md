@@ -228,3 +228,14 @@ let removedFruit = fruits.pop();
 console.log(removedFruit); // mango
 ```
 __________________________________________________________________________________________________________
+
+## additional methods
+* .includes() : Checks if a string (or array) contains a specific sequence of characters (or value) and returns true or false.
+
+* .toLowrCase() : Converts all characters in a string to lowercase letters.
+
+* .toUpperCase() : Converts all characters in a string to uppercase letters.
+
+* .endsWith() : Checks if a string ends with a specified sequence of characters and returns true or false.
+
+* .startsWith() : Checks if a string begins with a specified sequence of characters and returns true or false.
