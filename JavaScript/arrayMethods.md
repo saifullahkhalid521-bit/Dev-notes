@@ -193,6 +193,33 @@ console.log(findDupli);
 *Need a list of all matches? → filter()
 
 
+# some() method
+* some() returns true if AT LEAST ONE element passes the test, otherwise false , have elem , index and array.
+
+* Return value: Always a boolean (true or false) — never an array, never an element.
+
+### simple example
+```JavaScript
+const nums = [1, 3, 5, 6, 7];
+const hasEven = nums.some(n => n % 2 === 0);
+console.log(hasEven); // true (6 is even)
+```
+#### Difference btw some() & find()
+```JavaScript
+const nums = [1, 2, 3, 4];
+
+nums.find(n => n > 3); // 4      ← element
+nums.some(n => n > 3); // true   ← boolean
+```
+
+* it's mostly used for validation like 
+```JavaScript
+const fields = ["john", "", "doe"];
+const hasEmpty = fields.some(f => f.trim() === "");
+console.log(hasEmpty); // true
+```
+
+
 
 
 
