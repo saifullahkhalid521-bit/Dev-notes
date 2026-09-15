@@ -217,12 +217,40 @@ nums.some(n => n > 3); // true   ← boolean
 const fields = ["john", "", "doe"];
 const hasEmpty = fields.some(f => f.trim() === "");
 console.log(hasEmpty); // true
+
+const nums = [1, 2, 3, 4];
+nums.some(n => {
+  console.log("checking", n);
+  return n === 2;
+});
+/*checking 1
+checking 2
+It stops after finding 2 — never checks 3 or 4. This is short-circuiting in action.*/
 ```
 
+# every() method
+* every() returns true if ALL elements pass the test, otherwise false. it also have element , index and array
 
+* Return value: Always a boolean — never an array, never an element. 
 
+### Example
+```JavaScript
+const nums = [1, 2, 3, 4, 5];
+console.log(nums.every(n => n > 0)); // true
 
+// Are all strings non-empty?
+const words = ["apple", "banana", "cherry"];
+console.log(words.every(w => w.length > 0)); // true
 
+const words2 = ["apple", "", "cherry"];
+console.log(words2.every(w => w.length > 0)); // false
+```
+
+#### Empty array --> always true with .every()
+```JavaScript
+[].every(() => false); // true (!)
+//Why? Logically, "all elements satisfy X" is trivially true when there are no elements. (Same reason every in math is true for empty sets.)
+```
 
 
 ```JavaScript
