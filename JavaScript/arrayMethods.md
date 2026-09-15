@@ -253,6 +253,38 @@ console.log(words2.every(w => w.length > 0)); // false
 ```
 
 # reduce() method
+
+* reduce() poore array ko process karke usse ek single final value mein convert karta hai.
+
+* The callback must return something — whatever it returns becomes the new accumulator for the next iteration.
+
+* reduce() is the most flexible — you can technically implement map, filter, find using just reduce. But don't — use the right tool for the job.
+
+### Rule:
+1. Always pass an initial value unless you have a very specific reason not to.
+
+2. (accumulator, currentValue) — accumulator first, current second. Mixing them up is the #1 beginner bug.
+
+3. Callback MUST return something.
+
+#### Simple example and syntax
+```JavaScript
+//syntax
+array.reduce((accumulator, currentValue, index, array) => {
+  // return the new accumulator
+}, initialValue);
+
+//example
+const numbers = [10, 20, 30, 40];
+const total = numbers.reduce((acc, elem) => {
+  return acc + elem;
+}, 0);
+
+console.log(total);
+//OutPut -> 100
+```
+
+
 #### Imp example of Object with reduce for count.
 ```JavaScript
 const fruits = ["apple","banana","apple","cherry","banana","apple"];
@@ -306,6 +338,7 @@ console.log(count);
 }*/
 //same logic
 ```
+
 
 #### Imp example of Object with reduce for group.
 ```JavaScript
