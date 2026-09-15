@@ -252,6 +252,88 @@ console.log(words2.every(w => w.length > 0)); // false
 //Why? Logically, "all elements satisfy X" is trivially true when there are no elements. (Same reason every in math is true for empty sets.)
 ```
 
+# reduce() method
+#### Imp example of Object with reduce for count.
+```JavaScript
+const fruits = ["apple","banana","apple","cherry","banana","apple"];
+// Yahan final value ek OBJECT {} hogi.
+//
+// acc   = accumulator → hamara result object
+// fruit = current element → current fruit
+//
+// {} = initial value of accumulator
+const count = fruits.reduce((acc, fruit) => {
+
+  // acc[fruit] ka matlab:
+  //
+  // Agar fruit = "apple"
+  // toh acc[fruit] = acc["apple"]
+
+  // Pehli baar apple aayega toh:
+  // acc["apple"] → undefined
+
+  // undefined || 0 → 0
+  // 0 + 1 → 1
+  // So:
+  // acc["apple"] = 1
+
+  // Agar apple pehle se exist karta hai:
+  //
+  // acc["apple"] → 1
+
+  // 1 || 0 → 1
+  // 1 + 1 → 2
+  // So:
+  // acc["apple"] = 2
+
+  acc[fruit] = (acc[fruit] || 0) + 1;
+
+  // Updated accumulator ko return karna zaroori hai.
+  // Ye returned object next iteration ka accumulator banega.
+  return acc;
+
+}, {}); // reduce() ka accumulator initially empty object hai
+
+
+console.log(count);
+
+// Output: {   apple: 3,   banana: 2,  cherry: 1 }
+
+/*if (acc[fruit] > 0) {
+  acc[fruit] = acc[fruit] + 1;
+} else {
+  acc[fruit] = 1;
+}*/
+//same logic
+```
+
+#### Imp example of Object with reduce for group.
+```JavaScript
+const users = [
+  { name: "Alice", role: "admin" },
+  { name: "Bob", role: "user" },
+  { name: "Charlie", role: "admin" },
+  { name: "Dave", role: "user" }
+];
+
+const grouped = users.reduce((acc, user) => {
+
+  // Agar is role ka group abhi exist nahi karta,
+  // toh us role ke naam se ek empty array create karo.
+  if (!acc[user.role]) {
+    acc[user.role] = [];
+  }
+
+  // Current user ko uske role wale array mein add karo.
+  acc[user.role].push(user);
+
+  // Updated accumulator ko next iteration ke liye return karo.
+  return acc;
+
+}, {});
+
+console.log(grouped);
+```
 
 ```JavaScript
 ```
