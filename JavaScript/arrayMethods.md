@@ -464,6 +464,12 @@ words.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 "banana".localeCompare("apple"); // 1
 "apple".localeCompare("apple");  // 0
 ```
+1. we can Sort numbers ascending and descending
+2. we can Sort strings (default works!)
+3. we can Sort objects by property
+4. we can Sort by multiple fields
+5. we can Sort with custom rules
+* find the examples in internet 😈.
 
 ## ⚠️ Gotchas to Remember
 
