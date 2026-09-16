@@ -7,6 +7,7 @@
 6. reduce() method
 7. sort() method
 
+________________________________________________________________________________________________________________________________________
 
 # Map() method
 * It accepts a callback and applies that function to each element of an array, then return a new array.
@@ -81,6 +82,8 @@ console.log(result);
 Why?
 Because { } wale arrow function mein explicit return chahiye.*/
 ```
+__________________________________________________________________________________________________________________________________
+
 
 # filter() method
 * Array ke andar se condition satisfy karne wale elements ko select karke ek NEW array return karna.
@@ -162,6 +165,8 @@ const uniqueNumbers = numbers.filter((element, index, array) => {
 console.log(uniqueNumbers); // Output: [10, 20, 30]
 ```
 
+_________________________________________________________________________________________________________________________________________
+
 
 # find() method
 * find() returns the FIRST element that matches a condition. If nothing matches, it returns undefined.
@@ -191,6 +196,8 @@ console.log(findDupli);
 #### Rule of Thumb.
 * Need one specific item (by id, name, etc.)? → find()
 *Need a list of all matches? → filter()
+
+________________________________________________________________________________________________________________________________________
 
 
 # some() method
@@ -228,6 +235,8 @@ checking 2
 It stops after finding 2 — never checks 3 or 4. This is short-circuiting in action.*/
 ```
 
+_________________________________________________________________________________________________________________________________________
+
 # every() method
 * every() returns true if ALL elements pass the test, otherwise false. it also have element , index and array
 
@@ -251,6 +260,8 @@ console.log(words2.every(w => w.length > 0)); // false
 [].every(() => false); // true (!)
 //Why? Logically, "all elements satisfy X" is trivially true when there are no elements. (Same reason every in math is true for empty sets.)
 ```
+
+______________________________________________________________________________________________________________________________________
 
 # reduce() method
 
@@ -368,5 +379,70 @@ const grouped = users.reduce((acc, user) => {
 console.log(grouped);
 ```
 
+_________________________________________________________________________________________________________________________________________
+
+
+# sort() method
+* sort() rearranges the elements of an array based on a comparison rule you provide.
+
+## Sort Traps
+### 1st trap
+* Every method you've learned so far (map, filter, find, some, every, reduce) returns a new array or value. sort() does NOT.
 ```JavaScript
+const nums = [3, 1, 2];
+const sorted = nums.sort();
+
+console.log(sorted); // [1, 2, 3]
+console.log(nums);   // [1, 2, 3] ← ORIGINAL CHANGED!
+
+//Safe pattern: copy first
+const nums = [3, 1, 2];
+const sorted = [...nums].sort();   // spread creates a copy
+console.log(nums);   // [3, 1, 2]   ← untouched
+console.log(sorted); // [1, 2, 3]
 ```
+### 2nd trap
+* Without a comparison function, sort() converts everything to strings and compares them lexicographically (dictionary order).
+
+```JavaScript
+const nums = [10, 1, 5, 100, 25];
+nums.sort();
+console.log(nums); // [1, 10, 100, 25, 5]  ← 😱 NOT numerically sorted!
+
+//Why? Because "10" < "5" alphabetically (since "1" < "5" as characters).
+// This is the #1 gotcha with sort().
+```
+### The Comparison Function -- How it Works
+* To sort properly, you pass a comparator: (a, b) => ...
+
+* The comparator returns:
+
+* Negative number → a comes before b
+
+* Zero → keep order (a and b are "equal")
+
+* Positive number → a comes after b
+
+1. Return < 0  →  [a, b]   (a first)
+2. Return 0    →  [a, b]   (order preserved)
+3. Return > 0  →  [b, a]   (b first)
+
+* Ascending
+(a, b) => a - b
+
+* Descending
+(a, b) => b - a
+```JavaScript
+// Sort numbers ascending and descending
+const nums = [10, 1, 5, 100, 25];
+
+// Ascending
+const asc = [...nums].sort((a, b) => a - b);
+console.log(asc); // [1, 5, 10, 25, 100]
+
+// Descending
+const desc = [...nums].sort((a, b) => b - a);
+console.log(desc); // [100, 25, 10, 5, 1]
+```
+
+
