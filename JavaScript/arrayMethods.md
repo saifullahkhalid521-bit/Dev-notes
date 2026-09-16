@@ -457,7 +457,11 @@ console.log(words); // ["Banana", "Cherry", "apple"]  ← uppercase first!
 // to fix it we have to use localCompare()
 
 //localeCompare() is the "correct" way to compare strings (handles accents, case, etc.).
+
 words.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+// toLowerCase() strings ko same case mein laata hai; localeCompare() un strings ka proper comparison karta hai.
+
 
 // side code 
 "apple".localeCompare("banana"); // -1
@@ -486,6 +490,29 @@ console.log(a); // [1, 2, 3] — original changed
 [10, 9, 8].sort((a, b) => a - b); // [8, 9, 10]  ← correct
 ```
 
+* Example of how the comparator works for numeric sorting:
+
+| Step | El a | El b | Calculation (a - b) | Outcome / Decision | Array State After Step |
+|------|-------------|-----------|--------------------|-------------------|------------------------|
+| 1.   | 100  | 40   | 100 - 40 = 60 | 100 is larger than 40 → keep current order | [40, 100, 1, 5, 25, 10] |
+| 2.   | 1    | 100  | 1 - 100 = -99 | 1 is smaller than 100 → move 1 before 100 | [40, 1, 100, 5, 25, 10] |
+| 3.   | 1    | 40   | 1 - 40 = -39 | 1 is smaller than 40 → shift 1 to the front | [1, 40, 100, 5, 25, 10] |
+| 4.   | 5    | 100  | 5 - 100 = -95 | 5 is smaller than 100 → move 5 before 100 | [1, 40, 5, 100, 25, 10] |
+| 5.   | 5    | 40   | 5 - 40 = -35 | 5 is smaller than 40 → place 5 before 40 | [1, 5, 40, 100, 25, 10] |
+| 6.   | 25   | 100  | 25 - 100 = -75 | 25 is smaller than 100 → move 25 before 100 | [1, 5, 40, 25, 100, 10] |
+| 7.   | 25   | 40   | 25 - 40 = -15 | 25 is smaller than 40 → place 25 before 40 | [1, 5, 25, 40, 100, 10] |
+| 8.   | 10   | 100  | 10 - 100 = -90 | 10 is smaller than 100 → move 10 before 100 | [1, 5, 25, 40, 10, 100]
+| 9.   | 10   | 40   | 10 - 40 = -30 | 10 is smaller than 40 → move 10 before 40 | [1, 5, 25, 10, 40, 100] |
+| 10.  | 10   | 25   | 10 - 25 = -15 | 10 is smaller than 25 → place 10 before 25 | [1, 5, 10, 25, 40, 100] |
+
+* "a = first element, b = second element"
+
+* Ye misleading tha. Sorry bhai. ❌
+* Correct understanding:
+* a aur b comparator ko diye gaye do elements hain.
+* sort() decide karta hai ki kaunse do elements compare karne hain.
+
+
 3. Comparator must return a number
 ```javascript
 nums.sort((a, b) => a > b);  // ❌ returns boolean (true/false)
@@ -509,6 +536,20 @@ nums.sort((a, b) => a - b);  // ✅ returns number
 6. Comparator with undefined fields can crash
 ```javascript
 [{a: 1}, {}].sort((x, y) => x.a - y.a); // NaN comparisons — undefined behavior
+
+//Example
+const productsS = [
+  { name: "Laptop", price: 60000 },
+  { name: "Mouse" },                 // price missing
+  { name: "Keyboard", price: 2500 },
+  { name: "Monitor" }                // price missing
+];
+
+productsS.sort((a, b) => {
+  return (a.price ?? 0) - (b.price ?? 0);
+});
+
+console.log(productsS);
 ```
 * Always guard with ?? 0 if fields may be missing.
 
