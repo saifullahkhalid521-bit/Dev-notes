@@ -241,3 +241,5 @@ ________________________________________________________________________________
 * .startsWith() : Checks if a string begins with a specified sequence of characters and returns true or false.
 
 * .concat() : The .concat() method joins two or more strings (or arrays) together and returns a new string or array without changing the existing ones.
+
+* .shift() : It removes the first element from an array and returns that removed element. This method mutates (changes) the original array and updates its length.

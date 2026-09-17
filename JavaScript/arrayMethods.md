@@ -554,4 +554,29 @@ console.log(productsS);
 * Always guard with ?? 0 if fields may be missing.
 
 ```JavaScript
+// Numbers
+arr.sort((a, b) => a - b);                       // ascending
+arr.sort((a, b) => b - a);                       // descending
+
+// Strings
+arr.sort((a, b) => a.localeCompare(b));          // A→Z
+arr.sort((a, b) => b.localeCompare(a));          // Z→A
+
+// Objects by number field
+arr.sort((a, b) => a.age - b.age);               // ascending
+arr.sort((a, b) => b.price - a.price);           // descending
+
+// Objects by string field
+arr.sort((a, b) => a.name.localeCompare(b.name));
+
+// Multiple fields
+arr.sort((a, b) => a.x - b.x || a.y.localeCompare(b.y));
+
+// Booleans (false first)
+arr.sort((a, b) => a.done - b.done);
+
+// Dates
+arr.sort((a, b) => new Date(a) - new Date(b));
+```
+```JavaScript
 ```
