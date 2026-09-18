@@ -243,3 +243,9 @@ ________________________________________________________________________________
 * .concat() : The .concat() method joins two or more strings (or arrays) together and returns a new string or array without changing the existing ones.
 
 * .shift() : It removes the first element from an array and returns that removed element. This method mutates (changes) the original array and updates its length.
+
+##### new Date() 
+* It is used for dates , like ("2026-09-18T10:30:00") , it will convert it into date from string , some METHODS are
+1. getData() -> it will give day instead of full date.
+2. getMonth() -> if will give months.
+3. getFullYear() -> it will give year.
