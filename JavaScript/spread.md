@@ -139,6 +139,21 @@ const copy = { ...user };
 
 copy.address.city = "LA";
 console.log(user.address.city); // "LA" — nested object was NOT copied!
+
+To Deep Copy use structuredClone()
+
+example
+const userProfile = {
+  id: 101,
+  info: {
+    name: "Alex",
+    preferences: {
+      theme: "dark",
+      notifications: true
+    }}};
+const userProfileDeepCopy = structuredClone(userProfile);
+userProfileDeepCopy.info.preferences.theme = 'Light';
+console.log(userProfileDeepCopy);
 ```
 * Nested objects/arrays still share the same reference. For deep copies, use structuredClone() (modern) or a library.
 
@@ -201,6 +216,22 @@ Object.values(obj); // [1, 2]
 
 * For very large arrays, slice() might be faster than [...arr]. But in 99% of code, spread is fine and more readable.
 
-```javaScript
 
+
+## The "Spread + Immutability" Pattern (Memorize)
+```javaScript
+// Array — add
+const newArr = [...arr, item];
+
+// Array — remove by index
+const newArr = [...arr.slice(0, i), ...arr.slice(i + 1)];
+
+// Array — update by index
+const newArr = arr.map((x, idx) => idx === i ? newVal : x);
+
+// Object — update
+const newObj = { ...obj, key: newVal };
+
+// Object — delete
+const { keyToRemove, ...rest } = obj;
 ```
