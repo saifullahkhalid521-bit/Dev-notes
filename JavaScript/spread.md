@@ -129,6 +129,77 @@ const mid = [...arr.slice(0, 1), 99, ...arr.slice(1)];
 * Why not just push? Because spread gives you a new array instead of mutating. In React (immutability), this matters.
 
 
+## Gotchas to Remember
+
+1. Spread Creates a SHALLOW copy
+
+```javaScript
+const user = { name: "Alice", address: { city: "NYC" } };
+const copy = { ...user };
+
+copy.address.city = "LA";
+console.log(user.address.city); // "LA" — nested object was NOT copied!
+```
+* Nested objects/arrays still share the same reference. For deep copies, use structuredClone() (modern) or a library.
+
+
+2. Spread Vs Rest - same ... , opposite roles
+
+```javaScript
+const [a, ...rest] = arr;       // ← REST (collects)
+const arr2 = [...arr];           // ← SPREAD (expands)
+```
+
+
+3. Can't spread non-iterables
+
+```javaScript
+const obj = { a: 1 };
+console.log(...obj); // ❌ TypeError: obj is not iterable
+
+const nums = 5;
+console.log(...nums); // ❌ TypeError
+
+But — objects can be spread inside another object:
+
+const copy = { ...obj }; // ✅ works (object spread is a special case)
+```
+
+
+4. null/undefined inside spread → no error
+
+```javaScript
+const a = [1, 2];
+const b = null;
+const result = [...a, ...(b || [])]; // ✅
+console.log([...a, ...[]]); // ✅ [1, 2]
+
+// Actually, spreading null/undefined in object spread is safe:
+{ ...null } // {} (no error)
+{ ...undefined } // {}
+
+// But spreading null in an array context is an error:
+[null] // [null] ✅
+[...null] // ❌ TypeError
+```
+
+5. Spread doesn't spread objects into arrays
+
+```javaScript
+const obj = { a: 1, b: 2 };
+[...obj] // ❌ TypeError — object is not iterable
+
+// But this works (extracts values):
+Object.values(obj); // [1, 2]
+
+// Or keys:
+[...Object.keys(obj)]; // ["a", "b"]
+```
+
+
+6. Performance
+
+* For very large arrays, slice() might be faster than [...arr]. But in 99% of code, spread is fine and more readable.
 
 ```javaScript
 
