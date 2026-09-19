@@ -71,3 +71,65 @@ const updated = { ...user, age: 30 };
 console.log(updated); // { name: "Alice", age: 30, city: "NYC" }
 // The age from the last spread wins. This is how React state updates work.
 ```
+
+
+3. Passing array items as function arguments
+```javaScript
+const nums = [1, 2, 3];
+console.log(...nums); // 1 2 3 — same as console.log(1, 2, 3)
+```
+* This is how Math.max(...arr) works — you already used this in the sort lesson.
+
+
+4. Spreaqding Strings
+
+```javaScript
+const word = "hello";
+const chars = [...word];
+console.log(chars); // ["h", "e", "l", "l", "o"]
+
+const reversed = [...word].reverse().join("");
+console.log(reversed); // "olleh"
+```
+* Strings are iterable, so you can spread them:
+
+
+5. Converting Iterables to arrays
+
+```javaScript
+const set = new Set([1, 2, 2, 3, 3]);
+const arr = [...set];
+console.log(arr); // [1, 2, 3]
+
+const map = new Map([["a", 1], ["b", 2]]);
+console.log([...map]); // [["a", 1], ["b", 2]]
+```
+
+
+6. Adding Elements
+
+1. Add to end
+```javaScript
+const arr = [1, 2, 3];
+const withEnd = [...arr, 4];
+// [1, 2, 3, 4]
+```
+
+2. Add to beginnig
+```javaScript
+const withStart = [0, ...arr];
+// [0, 1, 2, 3]
+```
+
+3. Add to middle
+```javaScript
+const mid = [...arr.slice(0, 1), 99, ...arr.slice(1)];
+// [1, 99, 2, 3]
+```
+* Why not just push? Because spread gives you a new array instead of mutating. In React (immutability), this matters.
+
+
+
+```javaScript
+
+```
