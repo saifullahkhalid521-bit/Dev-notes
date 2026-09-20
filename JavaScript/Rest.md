@@ -186,3 +186,23 @@ obj.own = 2;
 const { ...rest } = obj;
 console.log(rest); // { own: 2 } — inherited not included
 ```
+
+5. Object rest is a SHALLOW copy
+Same as spread — nested objects still share references.
+
+
+6. Rest in destructuring must be a plain identifier
+```javascript
+const [...rest] = [1, 2, 3];        // ✅
+const [...[a, b]] = [1, 2, 3];      // ❌ can't nest inside rest
+```
+
+7. ... in function CALL is always spread, never rest
+```javascript
+sum(...arr);  // ← this is spread (expanding arr into args)
+The ... looks the same, but here it's spread because it's in a call, not in the function definition.
+```
+
+
+```javaScript
+```
