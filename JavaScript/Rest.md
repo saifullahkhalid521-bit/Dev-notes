@@ -149,5 +149,40 @@ function clone(...args) {
 * Same line, both meanings. The position tells you which.
 
 
-```javaScript
+## Gotchas to Remember
+
+1. Rest must be LAST
+```javascript
+function f(...rest, last) {}       // ❌
+const [...rest, last] = [1,2,3];   // ❌
+const { ...rest, name } = obj;     // ❌ (must be last)
+```
+
+2. Rest in function params collects into a real array
+```javascript
+function f(...args) {
+  console.log(Array.isArray(args)); // true ✅
+}
+Unlike arguments (which is array-like but not an array).
+```
+
+3. Arrow functions don't have arguments — use Rest
+```javascript
+const f = () => {
+  console.log(arguments); // ❌ ReferenceError
+};
+
+const g = (...args) => {
+  console.log(args); // ✅ [1, 2, 3]
+};
+```
+
+4. Object rest copies only OWN ENUMERABLE properties
+```javascript
+const proto = { inherited: 1 };
+const obj = Object.create(proto);
+obj.own = 2;
+
+const { ...rest } = obj;
+console.log(rest); // { own: 2 } — inherited not included
 ```
