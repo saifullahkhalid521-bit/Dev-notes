@@ -105,5 +105,27 @@ recammendation: Always pull before pushing to avoid conflicts.
 - `git checkout -b <name>` → create and switch to a new branch
 - `git checkout <name>` → switch branches
 
+
+## Pull Request
+* A Pull Request also known as PR is a request to merge the changes from one branch into another branch, usually from a feature branch into main, so the changes can be reviewed before merging.
+
+1. itle likho: Add day 1 branch practice notes
+
+2. Description mein likho:
+
+* Kya change kiya
+* Kyun kiya
+
+3. "Create pull request" click karo
+
+4. Ab khud ki PR review karo:
+
+* Files changed tab mein jao
+* Comments add karo (jaise "ye line improve kar sakta hoon")
+
+5. "Merge pull request" click karo
+
+6. Branch delete kar do (GitHub pe button aayega)
+
 ### Workflow
 main → feature branch → changes → commit → push → PR → review → merge → pull main → delete branch
