@@ -129,3 +129,49 @@ recammendation: Always pull before pushing to avoid conflicts.
 
 ### Workflow
 main → feature branch → changes → commit → push → PR → review → merge → pull main → delete branch
+
+
+## Merge + Local Sync + Merge Conflict
+* Concept: Merge GitHub pe hota hai, local main ko update karna zaroori hai. Conflict tab aata hai jab do branches same file edit karein.
+
+1. Part A -Local Sync
+
+* PR merge karne ke baad: 
+1. `git checkout main` → Switches to the main branch.
+
+2. `git pull origin main` → Downloads the latest changes from GitHub's main branch and updates your local main.
+
+3. `git branch -d feature/day1` → Deletes the local feature/day1 branch.
+
+
+2. Part B - Merge Conflict
+
+* Main branch pe ek file edit karo (conflict-test.txt)
+
+* Commit + push karo
+ 
+* Nayi branch banao: git checkout -b feature/conflict
+ 
+* Same file mein alag change karo
+ 
+* Commit + push karo
+ 
+* PR banao → "This branch has conflicts" message aayega
+ 
+* Local mein resolve karo:
+
+1. `git checkout main` → Switches to the main branch.
+
+2. `git pull origin main` → Gets the latest changes from GitHub's main and updates your local main.
+
+3. `git checkout feature/conflict` → Switches to the feature/conflict branch.
+
+4. `git merge main` → Merges the latest main changes into feature/conflict.
+
+* → Conflict aayega. File kholo, <<<<<<<, =======, >>>>>>> markers dikhenge. Manually resolve karo.
+
+`git add conflict-test.txt`
+`git commit -m "fix: resolve merge conflict"`
+`git push origin feature/conflict`
+
+* PR merge ho jayegi
