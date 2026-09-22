@@ -93,3 +93,17 @@ recammendation: Always pull before pushing to avoid conflicts.
 1. Use git push -u origin main the FIRST time you push a newly created branch to a remote repository. Setting the tracking link once saves you keystrokes going forward.  
 
 2. Use git push (or git push origin main) for subsequent pushes once the tracking link is already established.  
+
+
+## Branches
+
+* A branch is a separate line of development.
+* It allows me to work on changes without directly affecting the main branch.
+
+### Useful commands:
+- `git branch` → show local branches
+- `git checkout -b <name>` → create and switch to a new branch
+- `git checkout <name>` → switch branches
+
+### Workflow
+main → feature branch → changes → commit → push → PR → review → merge → pull main → delete branch
