@@ -94,6 +94,7 @@ recammendation: Always pull before pushing to avoid conflicts.
 
 2. Use git push (or git push origin main) for subsequent pushes once the tracking link is already established.  
 
+___________________________________________________________________________________________________________________________________________________
 
 ## Branches
 
@@ -140,6 +141,7 @@ main → feature branch → changes → commit → push → PR → review → me
 1. `git checkout main` → Switches to the main branch.
 
 2. `git pull origin main` → Downloads the latest changes from GitHub's main branch and updates your local main.
+<!-- check this -> (`git pull origin < merged branch name>`) -->
 
 3. `git branch -d feature/day1` → Deletes the local feature/day1 branch.
 
@@ -175,3 +177,29 @@ main → feature branch → changes → commit → push → PR → review → me
 `git push origin feature/conflict`
 
 * PR merge ho jayegi
+
+## How to change default branch in GitHub
+* just search for it in google 🙃;
+
+_____________________________________________________________________________________________________________________________________________
+
+## Git Restore Mistakes
+1. Discard changes in a specific file (Recommended)
+* If you only deleted content in one specific file (e.g., conflict-test.txt):
+`git restore filename.txt`
+
+2. Discard all uncommitted changes across all files
+* If you want to reset every modified or deleted file back to the last commit:
+`git restore .`
+
+3. If you already staged the deletion (git add)
+* If you accidentally ran git add . or git add filename.txt after deleting the text, unstage it first, then restore:
+1. Unstage the changes
+`git restore --staged filename.txt`
+2. Revert the file back to the last commit
+`git restore filename.txt`
+
+4. Alternative: Hard Reset (Nuclear Option)
+* If you want to discard all local modifications, staged files, and uncommitted edits at once:
+`git reset --hard HEAD`
+*Note* git restore and git reset --hard permanently erase uncommitted changes. Make sure you don't need any of your current unstaged work before running them.
