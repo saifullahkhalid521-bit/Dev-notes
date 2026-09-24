@@ -204,10 +204,13 @@ ________________________________________________________________________________
 `git reset --hard HEAD`
 *Note* git restore and git reset --hard permanently erase uncommitted changes. Make sure you don't need any of your current unstaged work before running them.
 
-# Git files
 
-## .gitkeep
+_____________________________________________________________________________________________________________________________________________________________
 
+
+# Core Git Configuration Files
+
+*.gitkeep*
 * .gitkeep is an empty placeholder file used to force Git to track an otherwise empty folder.
 
 ### How to use it
@@ -215,8 +218,7 @@ ________________________________________________________________________________
 1. Create a file named .gitkeep inside the empty folder.
 2. Commit and push the .gitkeep file.
 
-## .gitignore
-
+*.gitignore*
 * .gitignore is a plain text file that tells Git which files, folders, or auto-generated build outputs to ignore.
 
 * Files matched in .gitignore will not show up in git status and will never be committed or pushed to remote repositories like GitHub.
@@ -239,3 +241,32 @@ ________________________________________________________________________________
 
 2. Add patterns to ignore
 * Open .gitignore in your text editor and list the files or folders you want Git to ignore:
+
+ 
+*.gitattributes*
+* Sets file-specific rules, such as enforcing consistent line endings (LF vs CRLF) across Windows, Mac, and Linux.
+
+*.gitmodules*
+* Tracks external Git repositories embedded inside your main project as submodules.
+
+*.mailmap*
+* Cleans up commit history by merging duplicate author names and email addresses into single canonical identities.
+
+
+
+# Platform & Project Metadata Files (GitHub / GitLab)
+
+*README.md*
+* The main project documentation file that explains what the project does and how to set it up.
+
+*LICENSE*
+* Defines the legal open-source or proprietary terms for using, modifying, and sharing the code.
+
+*CODEOWNERS*
+* Automatically assigns specific team members or reviewers to Pull Requests based on modified files.
+
+*SECURITY.md*
+* Outlines instructions and safety procedures for reporting security vulnerabilities responsibly.
+
+*PULL_REQUEST_TEMPLATE.md*
+* Provides a standardized checklist or description template that appears whenever someone opens a PR.
