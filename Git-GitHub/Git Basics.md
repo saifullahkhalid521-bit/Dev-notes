@@ -203,3 +203,39 @@ ________________________________________________________________________________
 * If you want to discard all local modifications, staged files, and uncommitted edits at once:
 `git reset --hard HEAD`
 *Note* git restore and git reset --hard permanently erase uncommitted changes. Make sure you don't need any of your current unstaged work before running them.
+
+# Git files
+
+## .gitkeep
+
+* .gitkeep is an empty placeholder file used to force Git to track an otherwise empty folder.
+
+### How to use it
+
+1. Create a file named .gitkeep inside the empty folder.
+2. Commit and push the .gitkeep file.
+
+## .gitignore
+
+* .gitignore is a plain text file that tells Git which files, folders, or auto-generated build outputs to ignore.
+
+* Files matched in .gitignore will not show up in git status and will never be committed or pushed to remote repositories like GitHub.
+
+### Why use .gitignore?
+
+*It prevents sensitive data, temporary files, and heavy dependencies from cluttering your repository:
+
+1. API Keys & Credentials: .env, secrets.json
+ 
+2. Dependency Folders: node_modules/, vendor/
+ 
+3. Build Outputs: dist/, build/
+ 
+4. System & OS Files: .DS_Store, Thumbs.db
+
+### How do use it
+1. Create the file
+* Create a file named .gitignore (with the dot at the beginning) in the root directory of your Git project.
+
+2. Add patterns to ignore
+* Open .gitignore in your text editor and list the files or folders you want Git to ignore:
