@@ -7,6 +7,14 @@
 2. **Fulfilled**: The operation completed successfully.
 3. **Rejected**: The operation failed.
 
+### Promises return karne wale cheezein:
+
+1. fetch(...) → Promise
+ 
+2. response.json() → Promise
+ 
+3. async function hamesha Promise return karta hai (chahe tum kuch bhi return karo)
+
 ### Example of a Promise:
 
 ```javascript
