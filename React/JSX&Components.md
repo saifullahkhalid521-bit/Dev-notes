@@ -145,3 +145,71 @@ function App() {
   );
 }
 ```
+
+# Components
+
+components are the building blocks of a React application. They allow you to split the UI into independent, reusable pieces that can be managed separately.
+
+A component is simply a JavaScript function that returns JSX.
+
+```javascript
+For example:
+function UserCard() {
+  return (
+    <div>
+      <h2>Saifullah</h2>
+      <p>Frontend Developer</p>
+    </div>
+  );
+}
+```
+
+Let's break it down.
+Syntax	Meaning
+function	Creates a JavaScript function
+UserCard	Component name
+return	  Returns the UI
+()	      Contains the JSX
+<div>	    HTML-like element
+</div>	  Closing element
+
+Three important component rules:
+1. Component names must start with a capital letter.
+2. A component should return JSX (or null when nothing should be rendered).
+3. Components can be reused multiple times.
+For example:
+
+```javaScript
+function UserCard() {
+  return <h2>Welcome to React!</h2>;
+}
+
+function App() {
+  return (
+    <div>
+      <UserCard />
+      <UserCard />
+      <UserCard />
+    </div>
+  );
+}
+
+export default App;
+
+
+Browser output
+Welcome to React!
+Welcome to React!
+Welcome to React!
+One component, reused three times.
+Notice this:
+<UserCard />
+
+
+We are using the component like an HTML tag.
+
+We don't write:
+UserCard()
+```
+
+When using components in JSX, write them as tags.
