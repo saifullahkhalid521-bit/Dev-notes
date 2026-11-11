@@ -298,3 +298,92 @@ UserCard()
 ```
 
 When using components in JSX, write them as tags.
+
+15. Props (properties)
+Props are how a parent passes data to a child component. They are read-only (immutable) inside the component.
+
+```javascript
+function UserCard({ name, role, avatar }) {
+  return (
+    <div>
+      <img src={avatar} alt={name} />
+      <h2>{name}</h2>
+      <p>{role}</p>
+    </div>
+  );
+}
+```
+
+- Props are destructured in the parameter list or accessed via `props.name`.
+- Default props are assigned with default parameter values:
+  ```javascript
+  function Button({ label = "Click" }) { return <button>{label}</button>; }
+  ```
+- A component never modifies its own props — that is the parent's job.
+
+16. State (`useState`)
+State lets a component remember values that change over time. Updating state triggers a re-render.
+
+```javascript
+import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  );
+}
+```
+
+Rules:
+- Call `useState` at the top of the function component (not inside loops/conditions).
+- State updates are asynchronous — do not rely on the new value immediately.
+- When the new state depends on the old state, use the functional form:
+  ```javascript
+  setCount((prev) => prev + 1);
+  ```
+
+17. Component types
+- Function components (modern, recommended): plain functions returning JSX.
+- Class components: extend `React.Component` with a `render()` method. Still valid but legacy; prefer functions with hooks.
+
+18. Component composition
+Components can be nested and composed. Pass other components as children:
+
+```javascript
+function Card({ children }) {
+  return <div className="card">{children}</div>;
+}
+```
+
+The `children` prop contains whatever is placed between the opening and closing tags.
+
+19. Event handling
+- Event names are camelCase (`onClick`, `onChange`, `onSubmit`).
+- Pass a function reference, not call it:
+  ```javascript
+  <button onClick={handleClick}>   // correct
+  <button onClick={handleClick()}> // wrong (calls immediately)
+  ```
+
+20. Props validation and defaults
+- Use `prop-types` (or TypeScript) to document expected props and catch mistakes:
+  ```javascript
+  UserCard.propTypes = {
+    name: PropTypes.string.isRequired,
+    role: PropTypes.string
+  };
+  ```
+- In modern projects, TypeScript is preferred over `prop-types`.
+
+21. Key points summary
+- Components are functions that return JSX.
+- Name must start with a capital letter.
+- Props are immutable; state is mutable and triggers re-render.
+- Use `useState`/hooks for interactivity.
+- Reuse components by using them as tags (`<UserCard />`).
+- Keep components small and single-purpose (single responsibility).
+- Component files usually export the component (`export default` or named export).
