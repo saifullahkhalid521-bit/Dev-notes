@@ -146,6 +146,91 @@ function App() {
 }
 ```
 
+6. JSX under the hood (Babel transpilation)
+JSX is not valid JavaScript — the browser cannot understand it. Babel transpiles JSX into `React.createElement()` calls.
+
+```javascript
+// What you write
+const heading = <h1>Hello {username}</h1>;
+
+// What Babel produces
+const heading = React.createElement("h1", null, "Hello ", username);
+```
+
+`React.createElement(type, props, ...children)` creates a React element (a plain object describing what to render). This is why every JSX file needs `React` in scope (or the automatic JSX runtime in modern setups).
+
+7. Attributes and event handlers
+- Attributes use camelCase, not kebab-case: `onClick`, `onChange`, `maxLength`, `backgroundColor`.
+- HTML `for` → JSX `htmlFor`.
+- Event handlers are props that accept a function:
+  ```javascript
+  function Button() {
+    function handleClick() { alert("Clicked!"); }
+    return <button onClick={handleClick}>Click me</button>;
+  }
+  ```
+- Values are passed without quotes when they are expressions; use quotes for strings:
+  ```javascript
+  <img src={user.avatarUrl} alt="profile" />
+  ```
+
+8. Style attribute
+Inline styles are an object with camelCase keys and string values (units required for numbers except unitless CSS properties):
+```javascript
+const divStyle = { color: "white", backgroundColor: "blue", borderRadius: "8px" };
+<div style={divStyle}>Styled content</div>
+```
+
+9. Comments in JSX
+Comments must be wrapped in curly braces and be valid JS expressions:
+```javascript
+<div>
+  {/* This is a JSX comment */}
+  <h1>Hello</h1>
+</div>
+```
+
+10. Boolean, null, and undefined
+- `false`, `null`, `undefined`, and `true` are ignored in JSX (nothing renders):
+  ```javascript
+  const show = false;
+  const el = <div>{show}</div>; // renders nothing
+  ```
+- Boolean attributes are written without a value: `<input disabled />`.
+
+11. Lists and the key prop
+When rendering arrays, each item needs a unique `key` so React can track changes:
+```javascript
+const items = ["Apple", "Banana", "Cherry"];
+<ul>
+  {items.map((item) => (
+    <li key={item}>{item}</li>
+  ))}
+</ul>
+```
+Use a stable unique identifier (e.g. an `id` from data) rather than the array `index` when items can be reordered or added/removed.
+
+12. Conditional rendering
+- Ternary operator: `<div>{isLoading ? <Spinner /> : <Content />}</div>`
+- Logical `&&` (renders the element when true, nothing when false): `{hasMessages && <p>You have messages</p>}`
+- Avoid `if`/`else` statements directly inside JSX — extract them to a helper function or render conditionally outside the JSX.
+
+13. Fragment (named)
+`<>` is shorthand for `<React.Fragment>`. Use the named form when you need to pass a `key`:
+```javascript
+<React.Fragment key="row">
+  <td>Cell 1</td>
+  <td>Cell 2</td>
+</React.Fragment>
+```
+
+14. `dangerouslySetInnerHTML`
+To render raw HTML, use the `dangerouslySetInnerHTML` prop with a `__html` key:
+```javascript
+<div dangerouslySetInnerHTML={{ __html: rawHtml }} />
+```
+Only use this when the content is trusted — it opens an XSS risk.
+
 # Components
 
 components are the building blocks of a React application. They allow you to split the UI into independent, reusable pieces that can be managed separately.
