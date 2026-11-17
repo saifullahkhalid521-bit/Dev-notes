@@ -51,3 +51,37 @@ export function Product({ data }) {
 Parent Component:
 
 <Product data={{ title: "Laptop", price: 50000, tags: ["tech", "electronics"] }} />
+```
+## 5. Passing Functions as Props
+Event handling ke liye hum functions ko props ki tarah pass karte hain.
+
+Rule (Important): Function ko pass karte waqt () mat lagao. Sirf function ka naam (reference) do, warna wo turant run ho jayega.
+
+```jsx
+Child Component:
+
+export function AlertButton({ onClickAction, label }) {
+  return <button onClick={onClickAction}>{label}</button>;
+}
+
+Parent Component:
+
+function handleClick() {
+  console.log("Button clicked!");
+}
+
+<AlertButton label="Click Me" onClickAction={handleClick} />
+// onClickAction={handleClick} sahi hai, handleClick() nahi.
+```
+## 6. Common Mistakes to Avoid
+Props ko change mat karo (e.g., props.name = "new" mat likho).
+
+Number pass karte waqt age="22" nahi, age={22} likho (warna wo string ban jayega).
+
+Object pass karte waqt data={ {title: "..."} } aise likho, data="{title: '...'}" nahi.
+
+text
+
+---
+
+Ye notes bilkul crisp hain. Tum bina jaldi kiye inko ek baar padh lena, aur aaj ka code ek baar dekh lena. Jab next topic (List Rendering) ke liye ready ho, tab mujhe batao!
