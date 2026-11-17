@@ -130,3 +130,29 @@ function App() {
 | import    | Brings code from another file          |
 | export    | Shares code with other files           |
 | Fragment  | Groups JSX elements without extra HTML |
+
+
+* Single Component export example
+```JSX
+// 1. Component function — naam Capital letter se shuru hota hai
+function UserProfile() {
+  // 2. JavaScript variables — normal JS
+  const name = "Rahul";
+  const age = 25;
+  const skills = ["JS", "React"];
+
+  // 3. JSX return — ek parent div ke andar sab
+  return (
+    <div className="profile-card">
+      {/* 4. Comment JSX style */}
+      <h1>Hello, {name}!</h1>              {/* variable render */}
+      <p>Age: {age}</p>                     {/* number render */}
+      <p>Next year: {age + 1}</p>           {/* expression */}
+      <p>Skills: {skills.join(", ")}</p>    {/* function call */}
+      <p>Total skills: {skills.length}</p>  {/* property access */}
+    </div>
+  );
+}
+
+export default UserProfile;
+```
