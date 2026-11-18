@@ -131,3 +131,26 @@ export default function App() {
 }
 ```
 Yahan data={product} pass kiya gaya hai, jisse Card component ke andar poora object chala jata hai.
+
+## 7. Multiple Props Pass Karna .map() Ke Andar
+Tum ek saath multiple props bhi bhej sakte ho.
+
+```jsx
+const users = [
+  { id: 1, name: "Saif", role: "Dev" },
+  { id: 2, name: "Robot", role: "AI" }
+];
+
+// Parent ke andar
+{users.map((user) => (
+  <UserCard key={user.id} name={user.name} role={user.role} />
+))}
+```
+## 8. Common Mistakes (Inse Bacho)
+Capital Letter Error: Variables (arrays) ka naam hamesha small letter se shuru karo (e.g., users, products). Capital letters sirf React Components ke liye hote hain (e.g., UserCard). Agar variable ka naam capital hoga, toh React usko component samajh lega.
+
+Return Missing: Agar .map() ke andar {} use kar rahe ho, toh return likhna mat bhoolo. Warna screen blank (white) aayegi.
+
+Object Directly Render Karna: <div>{user}</div> mat likho (yahan user ek object hai). <div>{user.name}</div> likho.
+
+Missing key: .map() ke andar bane sabse pehle parent element (jaise <div> ya <Card>) par hamesha key do.
