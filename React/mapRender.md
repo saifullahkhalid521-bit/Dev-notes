@@ -73,3 +73,61 @@ Beginner Practice (index use karna):
 Note: index ka use tabhi karo jab tumhare paas unique ID na ho. Real projects mein hamesha id use hoti hai. Agar list sort ya delete hoti hai, toh index use karne se UI mein bugs aa sakte hain.
 
 
+## 5. Object ka Array Render Karna
+Agar data ek object ke andar hai, toh hum directly object ko render nahi kar sakte (React error dega), balki uski properties ko render karte hain.
+
+```jsx
+const products = [
+  { id: 1, title: "Laptop", price: 50000 },
+  { id: 2, title: "Mobile", price: 25000 }
+];
+
+function ProductList() {
+  return (
+    <div>
+      {products.map((product) => (
+        <div key={product.id}>
+          <h3>{product.title}</h3>
+          <p>Price: {product.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+## 6. Alag File Se Component Import Karke .map() Chalana
+Jab hum list render karte hain, toh hum aam taur par ek reusable component banate hain aur usko .map() ke andar call karte hain.
+
+Step 1: Child Component File (Card.jsx)
+
+```jsx
+export function Card({ data }) {
+  return (
+    <div style={{ border: "1px solid white", padding: "10px" }}>
+      <h3>{data.title}</h3>
+      <p>Price: {data.price}</p>
+    </div>
+  );
+}
+Step 2: Parent File (App.jsx)
+
+
+import { Card } from "./Card";
+
+const products = [
+  { id: 1, title: "Laptop", price: 50000 },
+  { id: 2, title: "Mobile", price: 25000 }
+];
+
+export default function App() {
+  return (
+    <div>
+      {products.map((product) => (
+        <Card key={product.id} data={product} />
+      ))}
+    </div>
+  );
+}
+```
+Yahan data={product} pass kiya gaya hai, jisse Card component ke andar poora object chala jata hai.
