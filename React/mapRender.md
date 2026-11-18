@@ -30,3 +30,46 @@ function FruitList() {
 }
 ```
 
+## 3. () Parentheses vs {} Curly Braces (Important!)
+.map() ke andar arrow function () => use karte waqt humein pata hona chahiye ki kab () lena hai aur kab {}.
+
+Rule 1: Direct JSX Return (Use Parentheses ())
+Agar tumhe direct JSX return karna hai, toh () use karo. Ye professional aur clean tarika hai. Isme return keyword likhne ki zaroorat nahi padti.
+
+```jsx
+{users.map((user) => (
+  <div>{user.name}</div>
+))}
+```
+
+Rule 2: Logic likhna ho toh (Use Curly Braces {} + return)
+Agar tumhe JSX return karne se pehle kuch JavaScript calculations ya logic likhna hai, toh {} use karo aur fir explicitly return likho.
+
+```jsx
+{users.map((user) => {
+  const upperName = user.name.toUpperCase(); // Logic
+  return <div>{upperName}</div>;             // Return JSX
+})}
+```
+
+## 4. key Prop Ka Funda (Sabse Zaroori Rule)
+
+Jab bhi .map() se list render karte hain, toh har element ko ek key prop dena compulsory hota hai. Agar nahi doge, toh console mein warning aayegi.
+Key kya karti hai? React ko ye batati hai ki list mein kaunsa item add hua, delete hua ya change hua. Isse React ki performance fast rehti hai.
+
+Best Practice (Database ID use karo):
+
+```jsx
+{users.map((user) => (
+  <div key={user.id}>{user.name}</div>
+))}
+Beginner Practice (index use karna):
+
+
+{users.map((user, index) => (
+  <div key={index}>{user.name}</div>
+))}
+```
+Note: index ka use tabhi karo jab tumhare paas unique ID na ho. Real projects mein hamesha id use hoti hai. Agar list sort ya delete hoti hai, toh index use karne se UI mein bugs aa sakte hain.
+
+
